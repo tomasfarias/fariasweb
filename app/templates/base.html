@@ -1,0 +1,90 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+    {% if title %}
+        {{ title }}
+    {% else %}
+       tomasfarias.com
+    {% endif %}
+{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+
+{% block scripts %}
+    {{ pagedown.include_pagedown() }}
+    {{ super() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('index') }}">tomasfarias.com</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('index') }}">Home</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if current_user.is_anonymous %}
+                        <li>
+                            <p class="navbar-text" style="margin-top: 10px; margin-bottom: 0px;">
+                                <a href="https://github.com/tomasfarias">
+                                    <img src="{{ url_for('static', filename='iconmonstr-github-3-24.png') }}">
+                                </a>
+                                <a href="https://www.linkedin.com/in/tomasfarias">
+                                    <img src="{{ url_for('static', filename='iconmonstr-linkedin-3-24.png') }}">
+                                </a>
+                                <a href="https://stackoverflow.com/users/3994693/tomas-farias">
+                                    <img src="{{ url_for('static', filename='iconmonstr-stackoverflow-3-24.png') }}">
+                                </a>
+                                <a href="https://stackoverflow.com/users/3994693/tomas-farias">
+                                    <img src="{{ url_for('static', filename='iconmonstr-gmail-3-24.png') }}">
+                                </a>
+                            </p>
+                        </li>
+                    {% else %}
+                        <li><a href="{{ url_for('create') }}">Create</a></li>
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 sidebar-bg" style="background-color: #f8f9fa">
+                <div class="sidebar mr-4">
+                    <h4>About me</h4>
+                    <p>I'm Tomás Farías, a software engineer based in Buenos Aires, Argentina. I'll be using this blog to ramble about Python, games, fitness, or any other topic that piques my interest.</p>
+                    <p>Feel free to interact with me in <a href="https://github.com/tomasfarias">GitHub</a>, <a href="https://www.linkedin.com/in/tomasfarias">LinkedIn</a>, <a href="https://stackoverflow.com/users/3994693/tomas-farias">Stack Overflow</a> or just <a href="mail to: tomasfariassantana@gmail.com">email me</a>.</p>
+                    <p>Have fun!</p>
+                </div>
+            </div>
+            <div class="col-md-8 bg-secondary">
+                {% block app_content %}
+                {% endblock %}
+            </div>
+        </div>
+        {%- block footer %}
+            <footer class="page-footer font-small">
+                <hr>
+                <div class="footer-copyright text-center">&copy; 2019 Tomás Farías</div>
+            </footer>
+        {%- endblock footer %}
+    </div>
+{% endblock %}

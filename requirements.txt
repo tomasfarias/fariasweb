@@ -1,0 +1,9 @@
+flask==1.0.2
+flask-fontawesome
+flask-bootstrap
+flask-sqlalchemy
+flask-wtf
+flask-migrate
+flask-login
+flask-pagedown
+flask-markdown

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block app_content %}
+    <div>
+        <h3><a href="{{ url_for('post', _id=post.id) }}">{{ post.title }}</a></h3>
+        <hr>
+        <p><i class="fa fa-calendar"></i> Posted on {{ post.timestamp.strftime('%B %d %Y') }}</p>
+        <p><i class="fa fa-tags"></i> Tags:
+            {% for tag in post.tags %}
+                <a href=""><span class="badge badge-info">{{ tag.text }}</span></a>
+            {% endfor %}
+        </p>
+        <hr>
+        <p>
+            {% filter markdown %}
+            {{ post.body }}
+            {% endfilter %}
+        </p>
+
+    </div>
+{% endblock %}

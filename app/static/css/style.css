@@ -1,0 +1,11 @@
+.top-buffer {
+    margin-top: 20px;
+}
+
+.a-title:link, .a-title:visited, .a-title:active {
+    color: black;
+    text-decoration: none;
+}
+.a-title:hover {
+    color: #303030;
+}
