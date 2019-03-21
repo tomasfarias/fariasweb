@@ -6,7 +6,7 @@
             <div class="col-md-12">
                 <p class="text-muted">{{ post.timestamp.strftime('%B %d %Y') }}</p>
                 <h3>
-                    <a href="{{ url_for('post', _id=post.id) }}" class="a-title">{{ post.title }}</a>
+                    <a href="{{ url_for('blog.post', _id=post.id) }}" class="a-title">{{ post.title }}</a>
                 </h3>
                 <p>
                     {% for tag in post.tags %}
@@ -23,12 +23,12 @@
     <nav aria-label="...">
         <ul class="pager">
             <li class="previous{% if not prev_url %} disabled{% endif %}">
-                <a href="{{ url_for('index', page=posts.next_num) or '#' }}">
+                <a href="{{ url_for('blog.index', page=posts.next_num) or '#' }}">
                     <span aria-hidden="true">&larr;</span> Newer posts
                 </a>
             </li>
             <li class="next{% if not next_url %} disabled{% endif %}">
-                <a href="{{ url_for('index', page=posts.prev_num) or '#' }}">
+                <a href="{{ url_for('blog.index', page=posts.prev_num) or '#' }}">
                     Older posts <span aria-hidden="true">&rarr;</span>
                 </a>
             </li>

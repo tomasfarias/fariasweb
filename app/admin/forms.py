@@ -1,9 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_pagedown.fields import PageDownField
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectMultipleField, FieldList, Field, IntegerField, FormField
-from wtforms.validators import ValidationError, DataRequired, Length
-from wtforms.widgets import TextArea, TextInput, HiddenInput
-from app.models import User
+from wtforms.validators import DataRequired
 
 
 class LoginForm(FlaskForm):
