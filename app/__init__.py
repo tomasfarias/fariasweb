@@ -28,7 +28,7 @@ def initialize_extensions(app):
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
-    login.login_view = 'login'
+    login.login_view = 'admin.login'
     bootstrap.init_app(app)
     Markdown(app)
 

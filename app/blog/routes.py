@@ -13,7 +13,7 @@ def index():
 
     if current_user.is_authenticated:
         return render_template(
-            'blog/index.html', title='Home', posts=posts, user=current_user
+            'blog/index.html', posts=posts, user=current_user
         )
 
     return render_template('blog/index.html', posts=posts)
