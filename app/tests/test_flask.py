@@ -47,3 +47,9 @@ def test_create(test_client):
     )
     response = test_client.get('/create', follow_redirects=True)
     assert response.status_code == 200
+
+    response = test_client.post(
+        '/create',
+        data=dict(title='This is a test', tags=['test'], body='This is a test'),
+        follow_redirects=True
+    )

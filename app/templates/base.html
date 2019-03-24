@@ -56,7 +56,7 @@
                             </p>
                         </li>
                     {% else %}
-                        <li><a href="{{ url_for('admin.create') }}">Create</a></li>
+                        <li><a href="{{ url_for('admin.create', _id=0) }}">Create</a></li>
                         <li><a href="{{ url_for('admin.logout') }}">Logout</a></li>
                     {% endif %}
                 </ul>

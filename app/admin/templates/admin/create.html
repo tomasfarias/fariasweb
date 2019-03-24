@@ -15,7 +15,16 @@
                     {% endfor %}
                 </p>
                 <p>
-                    {{ form.tags.label }} {{ form.tags(class='form-control tags') }}
+                    {{ form.tags.label }}
+                    {% if form.tags.data|length %}
+                        <select id="tags" class="form-control tags" multiple="multiple">
+                            {% for tag in form.tags.data %}
+                                <option selected="selected">{{ tag }}</option>
+                            {% endfor %}
+                        </select>
+                    {% else %}
+                        {{ form.tags(class='form-control tags') }}
+                    {% endif %}
                     {% for error in form.tags.errors %}
                         <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}

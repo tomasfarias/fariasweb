@@ -16,6 +16,9 @@
                 <p>
                     {{ post.body|markdown }}
                 </p>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('admin.create', _id=post.id) }}" class="font-small">edit</a>
+                {% endif %}
             </div>
         </div>
     {% endfor %}

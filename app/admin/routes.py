@@ -6,6 +6,7 @@ from . import admin_blueprint
 from .forms import LoginForm, CreateForm
 from app import db
 from app.models import User, Post, Tag
+from app.utils import title_to_url
 
 
 @admin_blueprint.route('/logout')
@@ -37,31 +38,45 @@ def login():
     return render_template('admin/login.html', title='Sign In', form=form)
 
 
-@admin_blueprint.route('/create', methods=['GET', 'POST'])
+@admin_blueprint.route('/create/<_id>', methods=['GET', 'POST'])
 @login_required
-def create():
-    tags = Tag.query.all()
-    form = CreateForm()
+def create(_id):
+    if _id is not None:
+        existing = Post.query.filter_by(id=_id).first_or_404()
+        form = CreateForm(obj=existing)
+        form.tags.data = [t.text for t in existing.tags]
+    else:
+        form = CreateForm()
 
+    tags = Tag.query.all()
     form.tags.choices = [(t.id, t.text) for t in tags]
 
     if form.validate_on_submit():
+        if _id is None:
+            post = Post()
+        else:
+            post = Post.query.filter_by(id=_id)
 
-        new_post = Post(
-            title=form.title.data, body=form.body.data, user_id=current_user.id
-        )
+        post.title = form.title.data
+        post.body = form.body.data
+        post.user_id = current_user.id
+        post.url = title_to_url(form.title.data)
 
+        tags = []
         for tag in form.tags.data:
             t = Tag.query.filter_by(text=tag).first()
             if t is None:
                 t = Tag(text=tag)
+            tags.append(t)
 
-            new_post.tags.append(t)
+        post.tags = tags
 
-        db.session.add(new_post)
+        db.session.add(post)
         db.session.commit()
         flash('Post created!')
 
         return redirect(url_for('blog.index'))
 
-    return render_template('admin/create.html', title='Create a post', form=form)
+    return render_template(
+        'admin/create.html', title='Create a post', form=form
+    )
