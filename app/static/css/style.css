@@ -9,3 +9,7 @@
 .a-title:hover {
     color: #303030;
 }
+
+.badge-info {
+  background-color: #3a87ad;
+}
