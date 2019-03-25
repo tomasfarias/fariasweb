@@ -19,7 +19,7 @@ def index():
     return render_template('blog/index.html', posts=posts)
 
 
-@blog_blueprint.route('/post/<_id>')
-def post(_id):
-    single_post = Post.query.filter_by(id=_id).first_or_404()
+@blog_blueprint.route('/post/<url_title>')
+def post(url_title):
+    single_post = Post.query.filter_by(url=url_title).first_or_404()
     return render_template('blog/post.html', post=single_post)

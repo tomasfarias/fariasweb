@@ -2,7 +2,7 @@
 
 {% block app_content %}
     <div>
-        <h3><a href="{{ url_for('blog.post', _id=post.id) }}">{{ post.title }}</a></h3>
+        <h3><a href="{{ url_for('blog.post', url_title=post.url) }}">{{ post.title }}</a></h3>
         <hr>
         <p><i class="fa fa-calendar"></i> Posted on {{ post.timestamp.strftime('%B %d %Y') }}</p>
         <p><i class="fa fa-tags"></i> Tags:

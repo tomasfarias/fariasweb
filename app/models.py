@@ -21,6 +21,14 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
+    @property
+    def password(self):
+        return self.password_hash
+
+    @password.setter
+    def password(self, value):
+        self.set_password(value)
+
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 

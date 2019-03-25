@@ -38,25 +38,16 @@ def login():
     return render_template('admin/login.html', title='Sign In', form=form)
 
 
-@admin_blueprint.route('/create/<_id>', methods=['GET', 'POST'])
+@admin_blueprint.route('/create', methods=['GET', 'POST'])
 @login_required
-def create(_id):
-    if _id is not None:
-        existing = Post.query.filter_by(id=_id).first_or_404()
-        form = CreateForm(obj=existing)
-        form.tags.data = [t.text for t in existing.tags]
-    else:
-        form = CreateForm()
+def create():
+    form = CreateForm()
 
     tags = Tag.query.all()
     form.tags.choices = [(t.id, t.text) for t in tags]
 
     if form.validate_on_submit():
-        if _id is None:
-            post = Post()
-        else:
-            post = Post.query.filter_by(id=_id)
-
+        post = Post()
         post.title = form.title.data
         post.body = form.body.data
         post.user_id = current_user.id
@@ -78,5 +69,44 @@ def create(_id):
         return redirect(url_for('blog.index'))
 
     return render_template(
-        'admin/create.html', title='Create a post', form=form
+        'admin/create.html', title='Create post', form=form
+    )
+
+
+@admin_blueprint.route('/update/<post_id>', methods=['GET', 'POST'])
+@login_required
+def update(post_id):
+    existing = Post.query.filter_by(id=post_id).first_or_404()
+    form = CreateForm(obj=existing)
+
+    tags = Tag.query.all()
+    form.tags.choices = [(t.id, t.text) for t in tags]
+
+    if form.validate_on_submit():
+        post = Post.query.filter_by(id=post_id).first_or_404()
+
+        post.title = form.title.data
+        post.body = form.body.data
+        post.user_id = current_user.id
+        post.url = title_to_url(form.title.data)
+
+        tags = []
+        for tag in form.tags.data:
+            try:
+                t = Tag.query.filter_by(id=int(tag)).first()
+            except ValueError:
+                t = Tag.query.filter_by(text=tag).first()
+                if t is None:
+                    t = Tag(text=tag)
+            tags.append(t)
+
+        post.tags = tags
+
+        db.session.commit()
+        flash('Post updated!')
+
+        return redirect(url_for('blog.index'))
+
+    return render_template(
+        'admin/update.html', title='Update post', form=form
     )

@@ -4,7 +4,7 @@
 {% block content %}
 
     <div class="container">
-        <h1>Create a new post</h1>
+        <h1>Update a post</h1>
         <div class="col-md-10 bg-secondary">
             <form method="post" action="" novalidate>
                 {{ form.hidden_tag() }}
@@ -16,7 +16,7 @@
                 </p>
                 <p>
                     {{ form.tags.label }}
-                    {{ form.tags(class='form-control tags', multiple='multiple') }}
+                    {{ form.tags(class='form-control tags', multiple='multiple', values=form.tags.data) }}
                     {% for error in form.tags.errors %}
                         <span style="color: red;">[{{ error }}]</span>
                     {% endfor %}

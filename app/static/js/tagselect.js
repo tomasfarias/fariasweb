@@ -1,8 +1,13 @@
 $(document).ready(function() {
-    $('#tags').select2({
-        allowClear:true,
-        placeholder: 'Tag post...',
-        tags: true,
-        tokenSeparators: [',', ' ']
+    $('#tags').selectize({
+        plugins: ['remove_button'],
+        delimiter: ',',
+        persist: false,
+        create: function(input) {
+            return {
+                value: input,
+                text: input
+            }
+        }
     });
 });
