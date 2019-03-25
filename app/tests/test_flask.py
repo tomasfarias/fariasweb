@@ -39,7 +39,7 @@ def test_client():
     yield testing_client
 
     db.session.remove()
-    #db.drop_all()
+    db.drop_all()
     ctx.pop()
 
 
@@ -106,7 +106,21 @@ def test_update(test_client):
         ),
         follow_redirects=True
     )
+    assert response.status_code == 200
     assert b'New test title' in response.data
     assert b'New and interesting body' in response.data
     assert b'new-tag' in response.data
     assert b'tag-test' in response.data
+
+
+def test_delete(test_client):
+    post = Post.query.first()
+    response = test_client.get(
+        f'/delete/{post.id}',
+        follow_redirects=True
+    )
+    assert response.status_code == 200
+    assert b'New test title' not in response.data
+    assert b'New and interesting body' not in response.data
+    assert b'new-tag' not in response.data
+    assert b'tag-test' not in response.data

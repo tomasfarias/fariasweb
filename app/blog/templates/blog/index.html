@@ -18,6 +18,7 @@
                 </p>
                 {% if current_user.is_authenticated %}
                     <a href="{{ url_for('admin.update', post_id=post.id) }}" class="font-small">edit</a>
+                    <a href="{{ url_for('admin.delete', post_id=post.id) }}" class="font-small">delete</a>
                 {% endif %}
             </div>
         </div>

@@ -110,3 +110,15 @@ def update(post_id):
     return render_template(
         'admin/update.html', title='Update post', form=form
     )
+
+
+@admin_blueprint.route('/delete/<int:post_id>')
+@login_required
+def delete(post_id):
+    post = Post.query.filter_by(id=post_id).first_or_404()
+
+    db.session.delete(post)
+    db.session.commit()
+
+    flash('Post deleted!')
+    return redirect(url_for('blog.index'))
