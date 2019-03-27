@@ -25,6 +25,19 @@ def login(client, username, password):
     return response
 
 
+def new_post(client, title, tags, body):
+    response = client.post(
+        '/create',
+        data=dict(
+            title=title,
+            tags=tags,
+            body=body
+        ),
+        follow_redirects=True
+    )
+    return response
+
+
 @pytest.fixture(scope='module')
 def test_client():
     flask_app = create_app(SETTINGS)
@@ -124,3 +137,19 @@ def test_delete(test_client):
     assert b'New and interesting body' not in response.data
     assert b'new-tag' not in response.data
     assert b'tag-test' not in response.data
+
+
+def test_tag_search(test_client):
+    new_post(test_client, 'First post', 'first', 'This is the first post')
+    new_post(test_client, 'Second post', 'second', 'This is the second post')
+
+    response = test_client.get(
+        '/index',
+        query_string={'tag': 'first'},
+        follow_redirects=True
+    )
+
+    assert response.status_code == 200
+    assert b'First post' in response.data
+    assert b'first' in response.data
+    assert b'<a href="/post/first-post" class="a-title">Second post</a>' not in response.data

@@ -8,8 +8,13 @@ from app.models import Post
 @blog_blueprint.route('/')
 @blog_blueprint.route('/index')
 def index():
+    tag = request.args.get('tag', None, type=str)
     page = request.args.get('page', 1, type=int)
-    posts = Post.query.order_by(Post.timestamp.desc()).paginate(page, 10, False)
+
+    if tag is not None:
+        posts = Post.query.order_by(Post.timestamp.desc()).filter(Post.tags.any(text=tag)).paginate(page, 10, False)
+    else:
+        posts = Post.query.order_by(Post.timestamp.desc()).paginate(page, 10, False)
 
     if current_user.is_authenticated:
         return render_template(
