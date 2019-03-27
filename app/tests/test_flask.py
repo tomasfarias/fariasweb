@@ -153,3 +153,52 @@ def test_tag_search(test_client):
     assert b'First post' in response.data
     assert b'first' in response.data
     assert b'<a href="/post/first-post" class="a-title">Second post</a>' not in response.data
+
+
+def test_title_search(test_client):
+    new_post(test_client, 'First post', 'first', 'This is the first post')
+    new_post(test_client, 'Second post', 'second', 'This is the second post')
+
+    response = test_client.get(
+        '/index',
+        query_string={'title': '%First%'},
+        follow_redirects=True
+    )
+
+    assert response.status_code == 200
+    assert b'<a href="/post/first-post" class="a-title">First post</a>' in response.data
+    assert b'first' in response.data
+    assert b'<a href="/post/second-post" class="a-title">Second post</a>' not in response.data
+
+    response = test_client.get(
+        '/index',
+        query_string={'title': '%second%'},
+        follow_redirects=True
+    )
+
+    assert response.status_code == 200
+    assert b'<a href="/post/second-post" class="a-title">Second post</a>' in response.data
+    assert b'second' in response.data
+    assert b'<a href="/post/first-post" class="a-title">First post</a>' not in response.data
+
+    response = test_client.post(
+        '/search',
+        data=dict(post_title='%second%'),
+        follow_redirects=True
+    )
+
+    assert response.status_code == 200
+    assert b'<a href="/post/second-post" class="a-title">Second post</a>' in response.data
+    assert b'second' in response.data
+    assert b'<a href="/post/first-post" class="a-title">First post</a>' not in response.data
+
+    response = test_client.post(
+        '/search',
+        data=dict(post_title='%First%'),
+        follow_redirects=True
+    )
+
+    assert response.status_code == 200
+    assert b'<a href="/post/first-post" class="a-title">First post</a>' in response.data
+    assert b'first' in response.data
+    assert b'<a href="/post/second-post" class="a-title">Second post</a>' not in response.data
