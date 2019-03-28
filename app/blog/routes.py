@@ -1,8 +1,10 @@
 from flask import render_template, request, redirect, url_for
 from flask_login import current_user
+from sqlalchemy.sql.functions import func
 
 from . import blog_blueprint
-from app.models import Post
+from app import db
+from app.models import Post, tag_association_table, Tag
 
 
 @blog_blueprint.route('/')
@@ -39,3 +41,16 @@ def search():
 def post(url_title):
     single_post = Post.query.filter_by(url=url_title).first_or_404()
     return render_template('blog/post.html', post=single_post)
+
+
+@blog_blueprint.context_processor
+def popular_tags():
+    tags = db.session.\
+        query(func.count(tag_association_table.c.post_id).label('count'), Tag.text).\
+        join(Tag).\
+        filter(Tag.id == tag_association_table.c.tag_id).\
+        distinct().\
+        group_by(tag_association_table.c.post_id).\
+        order_by(func.count(tag_association_table.c.post_id).desc()).\
+        all()
+    return dict(tags=tags)

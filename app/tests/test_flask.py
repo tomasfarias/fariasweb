@@ -62,6 +62,7 @@ def test_index(test_client):
 
     assert response.status_code == 200
     assert response2.status_code == 200
+    assert b'Most popular tags' not in response.data
 
 
 def test_valid_login(test_client):

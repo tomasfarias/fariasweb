@@ -88,6 +88,16 @@
                     <p>I'm Tomás Farías, a software engineer based in Buenos Aires, Argentina. I'll be using this blog to ramble about Python, games, fitness, or any other topic that piques my interest.</p>
                     <p>Feel free to interact with me in <a href="https://github.com/tomasfarias">GitHub</a>, <a href="https://www.linkedin.com/in/tomasfarias">LinkedIn</a>, <a href="https://stackoverflow.com/users/3994693/tomas-farias">Stack Overflow</a> or just <a href="mail to: tomasfariassantana@gmail.com">email me</a>.</p>
                     <p>Have fun!</p>
+                    <hr>
+                    {% if tags %}
+                        <h4>Most popular tags</h4>
+                        {% for tag in tags %}
+                        <p>
+                            <a href="{{ url_for('blog.index', query=tag.text) }}" class="badge badge-info">{{ tag.count }} | {{ tag.text }}</a>
+                        </p>
+                        {% endfor %}
+                    {% endif %}
+
                 </div>
             </div>
             <div class="col-md-8 bg-secondary">
