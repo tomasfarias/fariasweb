@@ -71,3 +71,12 @@ ENV/
 config.py
 *.db
 certs/
+
+class Config:
+    SECRET_KEY = 'fb7863e0b9da445bb3abcf6980bf7081'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://fariasweb:databasepy thonf_ariasweb2@localhost:3306/fariasweb'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+
+
+

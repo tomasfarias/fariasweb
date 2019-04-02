@@ -2,7 +2,7 @@ import pytest
 
 from app import create_app, db
 from app.models import User, Post
-from config import Config
+from config import TestingConfig
 
 
 def populate_db(db):
@@ -40,7 +40,7 @@ def new_post(client, title, tags, body):
 
 @pytest.fixture(scope='module')
 def test_client():
-    flask_app = create_app(Config)
+    flask_app = create_app(TestingConfig)
     testing_client = flask_app.test_client()
 
     ctx = flask_app.app_context()
