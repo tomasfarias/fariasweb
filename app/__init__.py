@@ -13,9 +13,9 @@ login = LoginManager()
 bootstrap = Bootstrap()
 
 
-def create_app(settings):
+def create_app(config):
     app = Flask(__name__, instance_relative_config=True)
-    app.config.update(settings)
+    app.config.from_object(config)
 
     initialize_extensions(app)
     register_blueprints(app)
