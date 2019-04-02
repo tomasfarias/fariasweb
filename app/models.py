@@ -46,7 +46,7 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.Text)
     title = db.Column(db.Text)
-    url = db.Column(db.Text, index=True)
+    url = db.Column(db.VARCHAR(255), index=True)
     timestamp = db.Column(db.DateTime, index=True, default=dt.datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     tags = db.relationship('Tag', secondary=tag_association_table)
