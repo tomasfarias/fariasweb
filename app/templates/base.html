@@ -39,6 +39,9 @@
                         <a href="{{ url_for('blog.index') }}">Home</a>
                     </li>
                     <li>
+                        <a href="{{ url_for('blog.post', url_title='welcome-to-my-blog') }}">Welcome</a>
+                    </li>
+                    <li>
                         <form action="{{ url_for('blog.search') }}" name="search" class="navbar-form" method="post">
                             <div class="input-group">
                                 <input class="form-control" type="text" placeholder="Search" name="post_title">
@@ -88,8 +91,8 @@
                     <p>I'm Tomás Farías, a software engineer based in Buenos Aires, Argentina. I'll be using this blog to ramble about Python, games, fitness, or any other topic that piques my interest.</p>
                     <p>Feel free to interact with me in <a href="https://github.com/tomasfarias">GitHub</a>, <a href="https://www.linkedin.com/in/tomasfarias">LinkedIn</a>, <a href="https://stackoverflow.com/users/3994693/tomas-farias">Stack Overflow</a> or just <a href="mail to: tomasfariassantana@gmail.com">email me</a>.</p>
                     <p>Have fun!</p>
-                    <hr>
                     {% if tags %}
+                        <hr>
                         <h4>Most popular tags</h4>
                         {% for tag in tags %}
                         <p>
