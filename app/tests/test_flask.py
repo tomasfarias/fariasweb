@@ -167,9 +167,9 @@ def test_title_search(test_client):
     )
 
     assert response.status_code == 200
-    assert b'<a href="/post/first-post" class="a-title">First post</a>' in response.data
+    assert b'<a href="/post/first-post" class="a-title">' in response.data
     assert b'first' in response.data
-    assert b'<a href="/post/second-post" class="a-title">Second post</a>' not in response.data
+    assert b'<a href="/post/second-post" class="a-title">' not in response.data
 
     response = test_client.get(
         '/index',
@@ -178,9 +178,9 @@ def test_title_search(test_client):
     )
 
     assert response.status_code == 200
-    assert b'<a href="/post/second-post" class="a-title">Second post</a>' in response.data
+    assert b'<a href="/post/second-post" class="a-title">' in response.data
     assert b'second' in response.data
-    assert b'<a href="/post/first-post" class="a-title">First post</a>' not in response.data
+    assert b'<a href="/post/first-post" class="a-title">' not in response.data
 
     response = test_client.post(
         '/search',
@@ -189,9 +189,9 @@ def test_title_search(test_client):
     )
 
     assert response.status_code == 200
-    assert b'<a href="/post/second-post" class="a-title">Second post</a>' in response.data
+    assert b'<a href="/post/second-post" class="a-title">' in response.data
     assert b'second' in response.data
-    assert b'<a href="/post/first-post" class="a-title">First post</a>' not in response.data
+    assert b'<a href="/post/first-post" class="a-title">' not in response.data
 
     response = test_client.post(
         '/search',
@@ -200,6 +200,6 @@ def test_title_search(test_client):
     )
 
     assert response.status_code == 200
-    assert b'<a href="/post/first-post" class="a-title">First post</a>' in response.data
+    assert b'<a href="/post/first-post" class="a-title">' in response.data
     assert b'first' in response.data
-    assert b'<a href="/post/second-post" class="a-title">Second post</a>' not in response.data
+    assert b'<a href="/post/second-post" class="a-title">' not in response.data
