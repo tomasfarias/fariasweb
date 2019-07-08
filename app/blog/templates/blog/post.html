@@ -8,7 +8,7 @@
         </h3>
         <p>
             {% for tag in post.tags %}
-                <a href="{{ url_for('blog.index', query=tag.text) }}" class="badge badge-info">{{ tag.text }}</a>
+                <a href="{{ url_for('blog.index', query=tag.text) }}" class="a-tag">{{ tag.text }}</a>
             {% endfor %}
         </p>
         <p>
