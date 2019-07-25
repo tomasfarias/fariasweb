@@ -92,7 +92,7 @@
                         <h4><strong>Most popular tags</strong></h4>
                         {% for tag in tags %}
                         <p>
-                            <a href="{{ url_for('blog.index', query=tag.text) }}" class="a-tag">{{ tag.text }}</a> {{ tag.count }}
+                            <a href="{{ url_for('blog.index', tag=tag.text) }}" class="a-tag">{{ tag.text }}</a> {{ tag.count }}
                         </p>
                         {% endfor %}
                     {% endif %}

@@ -15,11 +15,22 @@ def index():
     page = request.args.get('page', 1, type=int)
 
     if tag is not None:
-        posts = Post.query.order_by(Post.timestamp.desc()).filter(Post.tags.any(text=tag)).paginate(page, 10, False)
+        posts = Post\
+            .query\
+            .order_by(Post.timestamp.desc())\
+            .filter(Post.tags.any(text=tag))\
+            .paginate(page, 10, False)
     elif title is not None:
-        posts = Post.query.order_by(Post.timestamp.desc()).filter(Post.title.ilike(title)).paginate(page, 10, False)
+        posts = Post\
+            .query\
+            .order_by(Post.timestamp.desc())\
+            .filter(Post.title.ilike(title))\
+            .paginate(page, 10, False)
     else:
-        posts = Post.query.order_by(Post.timestamp.desc()).paginate(page, 10, False)
+        posts = Post\
+            .query\
+            .order_by(Post.timestamp.desc())\
+            .paginate(page, 10, False)
 
     if current_user.is_authenticated:
         return render_template(
