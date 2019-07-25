@@ -45,10 +45,11 @@ def post(url_title):
 
 @blog_blueprint.context_processor
 def popular_tags():
-    tags = db.session.\
-        query(func.count(tag_association_table.c.post_id).label('count'), Tag.text).\
-        join(Tag, Tag.id == tag_association_table.c.tag_id).\
-        group_by(Tag.text).\
-        order_by(func.count(tag_association_table.c.post_id).desc()).\
-        all()
+    tags = db\
+        .session\
+        .query(func.count(tag_association_table.c.post_id).label('count'), Tag.text)\
+        .join(Tag, Tag.id == tag_association_table.c.tag_id)\
+        .group_by(Tag.text)\
+        .order_by(func.count(tag_association_table.c.post_id).desc())\
+        .all()
     return dict(tags=tags)
