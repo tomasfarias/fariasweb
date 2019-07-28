@@ -2,10 +2,12 @@
 
 {% block app_content %}
     <div>
-        <p class="text-muted">{{ post.timestamp.strftime('%B %d %Y') }}</p>
         <h3>
-            <a href="{{ url_for('blog.post', url_title=post.url) }}" class="a-title">{{ post.title }}</a>
+            <a href="{{ url_for('blog.post', url_title=post.url) }}" class="a-title"><strong>{{ post.title }}</strong></a>
         </h3>
+        <p class="text-muted">
+            {{ post.timestamp.strftime('%B %d, %Y') }}
+        </p>
         <p>
             {% for tag in post.tags %}
                 <a href="{{ url_for('blog.index', query=tag.text) }}" class="a-tag">{{ tag.text }}</a>

@@ -61,6 +61,6 @@ def popular_tags():
         .query(func.count(tag_association_table.c.post_id).label('count'), Tag.text)\
         .join(Tag, Tag.id == tag_association_table.c.tag_id)\
         .group_by(Tag.text)\
-        .order_by(func.count(tag_association_table.c.post_id).desc())\
+        .order_by(func.count(tag_association_table.c.post_id).desc(), Tag.text.desc())\
         .all()
     return dict(tags=tags)
