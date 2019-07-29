@@ -1,3 +1,10 @@
+p {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 18px;
+  line-height: 25px;
+}
+
 .top-buffer {
     margin-top: 20px;
 }
@@ -71,6 +78,7 @@ body {
     color: #5fa58d;
     text-decoration: underline;
 }
+
 .no-border {
     border: none;
     box-shadow: none;
