@@ -7,10 +7,10 @@
                 <h3>
                     <a href="{{ url_for('blog.post', url_title=post.url) }}" class="a-title"><strong>{{ post.title }}</strong></a>
                 </h3>
-                <p class="text-muted">
-                    {{ post.timestamp.strftime('%B %d, %Y') }}
-                </p>
                 <p>
+                    <span class="text-muted">
+                        {{ post.timestamp.strftime('%B %d, %Y') }}
+                    </span>
                     {% for tag in post.tags %}
                         <a href="{{ url_for('blog.index', tag=tag.text) }}" class="a-tag">{{ tag.text }}</a>
                     {% endfor %}
