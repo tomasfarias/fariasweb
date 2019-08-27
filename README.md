@@ -27,7 +27,7 @@ set FLASK_ENV=development
 In bash:
 ```
 export FLASK_APP=fariasweb.py
-export FLAS_ENV=development
+export FLASK_ENV=development
 ```
 
 Only the first time, you will need to run the database migrations:
