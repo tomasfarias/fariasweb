@@ -1,4 +1,4 @@
-name: Fariasweb
+name: Fariasweb CI
 
 on: 
   push:
@@ -40,4 +40,5 @@ jobs:
       run: |
         pytest
       env:
-        FLASK_APP: fariasweb
+        FLASK_APP: fariasweb.py
+        FLASK_ENV: development
