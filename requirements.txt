@@ -7,3 +7,4 @@ flask-login
 flask-pagedown
 flask-markdown
 pytest
+python-dotenv
