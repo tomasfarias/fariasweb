@@ -68,6 +68,5 @@ ENV/
 .idea/
 
 # Project specific
-config.py
 *.db
 certs/
