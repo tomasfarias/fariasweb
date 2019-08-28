@@ -1,16 +1,10 @@
-name: Fariasweb CI
+name: Fariasweb Test
 
-on: 
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+on: pull_request
 
 jobs:
   test:
-  
+
     name: Set up Python ${{ matrix.python-version }} and test the application
     runs-on: ubuntu-latest
     strategy:
