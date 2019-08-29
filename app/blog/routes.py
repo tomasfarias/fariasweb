@@ -5,6 +5,7 @@ from sqlalchemy.sql.functions import func
 from . import blog_blueprint
 from app import db
 from app.models import Post, tag_association_table, Tag
+from app.utils import post_preview
 
 
 @blog_blueprint.route('/')
@@ -34,10 +35,13 @@ def index():
 
     if current_user.is_authenticated:
         return render_template(
-            'blog/index.html', posts=posts, user=current_user
+            'blog/index.html', posts=posts, user=current_user,
+            preview_func=post_preview
         )
 
-    return render_template('blog/index.html', posts=posts)
+    return render_template(
+        'blog/index.html', posts=posts, preview_func=post_preview
+    )
 
 
 @blog_blueprint.route('/search', methods=['POST'])

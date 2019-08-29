@@ -16,7 +16,7 @@
                     {% endfor %}
                 </p>
                 <p>
-                    {{ post.body|markdown }}
+                    {{ preview_func(post.body, 220)|markdown }}
                 </p>
                 {% if current_user.is_authenticated %}
                     <a href="{{ url_for('admin.update', post_id=post.id) }}" class="font-small">edit</a>
