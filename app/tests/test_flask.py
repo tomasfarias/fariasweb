@@ -85,13 +85,13 @@ def test_create(test_client):
         data=dict(
             title='This is a test',
             tags=['tag-test', 'old-tag'],
-            body='Post body'
+            body='body ' * 45  # 225 characters
         ),
         follow_redirects=True
     )
     assert response.status_code == 200
     assert b'This is a test' in response.data
-    assert b'Post body' in response.data
+    assert b'body ' * 43 + b'body...' in response.data  # preview 220
     assert b'tag-test' in response.data
 
 
@@ -99,7 +99,7 @@ def test_post_url(test_client):
     response = test_client.get('/post/this-is-a-test', follow_redirects=True)
     assert response.status_code == 200
     assert b'This is a test' in response.data
-    assert b'Post body' in response.data
+    assert b'body ' * 45 in response.data
     assert b'tag-test' in response.data
 
 
@@ -108,7 +108,7 @@ def test_update(test_client):
     response = test_client.get(f'/update/{post.id}', follow_redirects=True)
     assert response.status_code == 200
     assert b'This is a test' in response.data
-    assert b'Post body' in response.data
+    assert b'body ' * 45 in response.data
     assert b'tag-test' in response.data
 
     response = test_client.post(
