@@ -3,7 +3,7 @@
 {% block app_content %}
 <div class="row">
     <div class="col-md-12">
-        <div>
+        <article class="post">
             <h3>
                 <a href="{{ url_for('blog.post', url_title=post.url) }}" class="a-title"><strong>{{ post.title }}</strong></a>
             </h3>
@@ -22,7 +22,7 @@
                     <a href="{{ url_for('admin.update', post_id=post.id) }}" class="font-small">edit</a>
                     <a href="{{ url_for('admin.delete', post_id=post.id) }}" class="font-small">delete</a>
                 {% endif %}
-        </div>
+        </article>
     </div>
 </div>
 {% endblock %}
