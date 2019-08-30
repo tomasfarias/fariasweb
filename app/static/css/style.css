@@ -141,3 +141,7 @@ a svg #logo {
 a svg:hover #logo {
   fill: #5fa58d;
 }
+
+.post {
+    padding-bottom: 3rem;
+}
