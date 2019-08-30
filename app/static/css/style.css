@@ -1,21 +1,28 @@
 p {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  font-size: 18px;
-  line-height: 25px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    line-height: 25px;
+}
+
+h3 {
+    letter-spacing: -1px
 }
 
 .top-buffer {
     margin-top: 20px;
 }
 
+a {
+    display: inline-block;
+}
+
 .a-title:link, .a-title:visited, .a-title:active {
-    color: black;
+    color: #252525;
     text-decoration: none;
 }
 .a-title:hover {
-    color: #303030;
-    text-decoration: underline;
+    color: #3e3e3e;
 }
 
 .a-tag:link, .a-tag:visited, .a-tag:active {
@@ -26,7 +33,6 @@ p {
 
 .a-tag:hover {
     color: #5fa58d;
-    text-decoration: underline;
 }
 
 a:link, a:visited, a:active {
@@ -36,7 +42,6 @@ a:link, a:visited, a:active {
 
 a:hover {
     color: #5fa58d;
-    text-decoration: underline;
 }
 
 .badge-info {
@@ -45,7 +50,7 @@ a:hover {
 
 body {
     font-family: 'Roboto', sans-serif;
-    color: black;
+    color: #252525;
 }
 
 .navbar-default {
@@ -54,17 +59,17 @@ body {
 }
 
 .navbar-default .navbar-brand {
-    color: black;
+    color: #252525;
     font-size: 20px;
     font-weight: bold;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-    color: #303030;
+    color: #3e3e3e;
 }
 
 .navbar-default .navbar-nav > li > a {
-    color: black;
+    color: #252525;
     font-size: 18px;
 }
 .navbar-default .navbar-nav > li > a:hover,
@@ -83,7 +88,6 @@ body {
 
 .pager li > a:focus, .pager li > a:hover {
     color: #5fa58d;
-    text-decoration: underline;
 }
 
 .no-border {
@@ -93,16 +97,47 @@ body {
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
     border-radius: 0;
-    color: black;
+    color: #252525;
 }
 
 .no-border:focus, .no-border:hover {
     border: 0 1px 0 0 solid black;
     box-shadow: 0 2px 0 0;
     border-width: 0 1px 0 0;
-    color: black;
+    color: #3e3e3e;
 }
 
 .no-border::placeholder {
-    color: black;
+    color: #252525;
+}
+
+.sidebar p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.sidebar h3 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 15px;
+    line-height: 22px;
+}
+
+object {
+    pointer-events: none;
+    vertical-align: middle;
+}
+
+a svg {
+    vertical-align: middle;
+}
+
+a svg #logo {
+    fill: #04724d;
+}
+
+a svg:hover #logo {
+  fill: #5fa58d;
 }
